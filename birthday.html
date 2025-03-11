@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Alina</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            text-align: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            margin-top: 50px;
+            color: white;
+            animation: fadeIn 2s ease-in-out;
+        }
+        h1 {
+            font-size: 50px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        .gallery {
+            margin-top: 20px;
+        }
+        img, video {
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            margin: 10px;
+            animation: zoomIn 1.5s ease-in-out;
+        }
+        .play-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 20px;
+            background: #ff4e50;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            animation: bounce 2s infinite;
+        }
+        .play-button:hover {
+            background: #fc6767;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .confetti {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <canvas class="confetti"></canvas>
+    <div class="container">
+        <h1>Happy Birthday Alina! 🎉🎂</h1>
+        <div class="gallery">
+            <img src="WhatsApp Image 2025-03-11 at 13.16.25_99c474b2.jpg" alt="Alina 1">
+            <img src="WhatsApp Image 2025-03-11 at 13.16.26_2f391461.jpg" alt="Alina 2">
+            <video autoplay loop muted>
+                <source src="WhatsApp Video 2025-03-11 at 13.16.25_7cb91f09.mp4" type="video/mp4">
+            </video>
+        </div>
+        <button class="play-button" onclick="playSong()">🎶 Play Song</button>
+        <audio id="birthday-audio" src="Happy Birthday Original!.mp3"></audio>
+    </div>
+    <script>
+        function playSong() {
+            document.getElementById("birthday-audio").play();
+        }
+        const confettiCanvas = document.querySelector(".confetti");
+        const confettiCtx = confettiCanvas.getContext("2d");
+        confettiCanvas.width = window.innerWidth;
+        confettiCanvas.height = window.innerHeight;
+
+        const confettiParticles = [];
+        for (let i = 0; i < 100; i++) {
+            confettiParticles.push({
+                x: Math.random() * confettiCanvas.width,
+                y: Math.random() * confettiCanvas.height,
+                r: Math.random() * 5 + 2,
+                d: Math.random() * 2 + 1,
+                color: `hsl(${Math.random() * 360}, 100%, 50%)`
+            });
+        }
+        function drawConfetti() {
+            confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            confettiParticles.forEach(p => {
+                confettiCtx.beginPath();
+                confettiCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                confettiCtx.fillStyle = p.color;
+                confettiCtx.fill();
+                p.y += p.d;
+                if (p.y > confettiCanvas.height) p.y = 0;
+            });
+            requestAnimationFrame(drawConfetti);
+        }
+        drawConfetti();
+    </script>
+</body>
+</html>
