@@ -12,13 +12,15 @@
             background: linear-gradient(45deg, #ff9a9e, #fad0c4);
             text-align: center;
             font-family: Arial, sans-serif;
-            overflow: hidden;
+            overflow-x: hidden; /* Prevents horizontal scrolling */
+            overflow-y: auto; /* Enables vertical scrolling */
         }
         .container {
             position: relative;
             margin-top: 50px;
             color: white;
             animation: fadeIn 2s ease-in-out;
+            min-height: 100vh; /* Ensures content extends beyond screen height if needed */
         }
         h1 {
             font-size: 50px;
